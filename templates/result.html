@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Result</title>
+       <link rel="stylesheet" media="screen" href ="static/bootstrap.min.css">
+       <link rel="stylesheet" href="static/bootstrap-theme.min.css">
+       <script type="text/javascript"
+         src="{{ url_for('static', filename='downloadFile.js') }}">
+       </script>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+       <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+        <style>
+        
+        #tblStocks {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+              }
+
+              #tblStocks td, #tblStocks th {
+                border: 1px solid rgb(0, 0, 0);
+                padding: 8px;
+              }
+
+              #tblStocks tr:nth-child(odd){background-color: #04cafb;}
+
+              #tblStocks tr:nth-child(even){background-color: #ef97f5;}
+
+              #tblStocks tr:hover {background-color: #ddd;}
+
+              #tblStocks th {
+                  padding-top: 12px;
+                  padding-bottom: 12px;
+                  text-align: left;
+                  background-color: #fff049;;
+                  color: rgb(0, 0, 0);
+                }
+        </style>
+        <script>
+          function myFunction() {
+              alert("Output saved !");
+          }
+        </script>
+    </head>
+    <body style="background-color:rgb(28, 243, 136);">
+ 
+ 
+<div class="container">
+ 
+ 
+ <center> <h1>Marathi Parts of Speech Tagger</h1></center>
+  <form  action="/tag" method="post" role="form">
+   
+    <div class="form-group">
+      <label for="sentence">Enter Sentence:</label>
+      <input type="text" class="form-control" id="sentence" name="sentence" value="{{output.input}}" placeholder="Marathi Sentence">
+      <br>
+     
+ 
+ 
+    </div>
+    <center> <button type="submit"  class="btn btn-success">Tag POS</button><center> 
+  
+    
+    
+  </form>
+  <Br>
+  <Br>
+
+    
+    <center><button onclick="myFunction()"><span class="glyphicon glyphicon-download"></span> Save Output to CSV file</button></center>
+  
+    <center><h1>Output</h1></center>
+    <table class="table table-hover" id="tblStocks">
+      <thead>
+        <tr>
+          <th scope="col">Sr.No</th>
+          <th scope="col">Word</th>
+          <th scope="col">Parts of Speech</th>
+        </tr>
+      </thead>
+      <tbody>
+
+    {% for i in range(output.taggedOutput.shape[0]) %}
+    <tr>
+    <td>{{i+1}}</td>
+    <td>{{output.taggedOutput[i][0]}}</td>
+    <td>{{output.taggedOutput[i][1]}}</td>
+    </tr>
+    {% endfor%}
+      
+      </tbody>
+    </table>
+</br>
+ {{ taggedOutput }}
+  <br>
+</div>
+<br>            
+</div>
+</div>
+</body>
+</html>
